@@ -111,7 +111,7 @@ class Video(Anuncio):
             return "COMPRESION DE VIDEO NO IMPLEMENTADA AUN"
 
         def redimensionar_anuncio():
-            return "RECORTE DE VIDEO NO IMPLEMENTADO AUN"
+            return "REDIMENSIONAMIENTO DE VIDEO NO IMPLEMENTADO AUN"
 
 class Display(Anuncio):
 
@@ -120,6 +120,14 @@ class Display(Anuncio):
 
     def redimensionar_anuncio():
         return "RECORTE DE ANUNCIOS DISPLAY NO IMPLEMENTADO AUN"
+
+class Social(Anuncio):
+    def comprimir_anuncio():
+        return "COMPRESION DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADA AUN"
+
+    def redimensionar_anuncio():
+        return "REDIMENSIONAMIENTO DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADO AUN"
+
 
 
 
