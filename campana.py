@@ -1,8 +1,5 @@
 from anuncio import Anuncio, Video, Display, Social
-
-class LargoExcedidoException(Exception):
-    pass
-
+from errores import LargoExcedidoException
 
 class Campana:
     def __init__(self, nombre: str, listado_anuncios, fecha_inicio = None, fecha_termino = None):

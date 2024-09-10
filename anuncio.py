@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
-
-class SubTipoInvalidoException(Exception):
-    pass
+from errores import SubTipoInvalidoException
 
 class Anuncio(ABC):
     SUB_TIPOS = {
