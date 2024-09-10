@@ -2,6 +2,22 @@ from abc import ABC, abstractmethod
 from errores import SubTipoInvalidoException
 
 class Anuncio(ABC):
+    """
+    Clase Padre Anuncio, que crea anuncios con atributos base
+
+    Parametros:
+    - ancho: int, ancho del anuncio.
+    - alto: int, alto del anuncio.
+    - url_archivo: str, link del archivo.
+    - url_clic: str, link de clic.
+    - sub_tipo: tipo de anuncio dentro de cada Categoria de anuncio.
+
+    Return:
+    - mostrar_formatos(), muestra los formatos disponibles con cada uno de sus subtipos.
+    - comprimir_anuncio(), base para las clases hijas
+    - redimensionar_anuncio(), base para las clases hijas
+    """
+
     SUB_TIPOS = {
         "Video": ("instream", "outstream"),
         "Display": ("tradicional", "native"),
@@ -71,6 +87,9 @@ class Anuncio(ABC):
 
     @staticmethod
     def mostrar_formatos():
+        """
+        Imprime los formatos en la consola si se llama.
+        """
         for formato, subtipos in Anuncio.SUB_TIPOS.items():
             print(f"{formato.upper()}:")
             print("=" * 10)
@@ -88,6 +107,17 @@ class Anuncio(ABC):
 
 
 class Video(Anuncio):
+    """
+        Clase hija de "Anuncio" con parametros especificos para Anuncios del tipo video.
+        Parametros extras de su clase padre:
+        - duracion: int, almacena la duracion del anuncio de tipo video
+        - ancho: int, almacena ancho = 1 especificamente
+        - alto: int, almacena alto = 1 especificamente
+
+        Return:
+        - comprimir_anuncio(), mensaje especifico de la clase
+        - redimencionar_anuncio, mensjae especifico de la clase
+        """
     FORMATO = "Video"
     SUB_TIPOS = ("instream", "outstream")
 
@@ -114,6 +144,14 @@ class Video(Anuncio):
         return "REDIMENSIONAMIENTO DE VIDEO NO IMPLEMENTADO AUN"
 
 class Display(Anuncio):
+
+    """
+    Clase hija de "Anuncio" con parametros especificos para Anuncios del tipo Display.
+
+    Return:
+    - comprimir_anuncio(), mensaje especifico de la clase
+    - redimencionar_anuncio, mensjae especifico de la clase
+    """
     FORMATO = "Display"
     SUB_TIPOS = ("tradicional", "native")
 
@@ -124,6 +162,14 @@ class Display(Anuncio):
         return "RECORTE DE ANUNCIOS DISPLAY NO IMPLEMENTADO AUN"
 
 class Social(Anuncio):
+
+    """
+    Clase hija de "Anuncio" con parametros especificos para Anuncios del tipo Social.
+
+    Return:
+    - comprimir_anuncio(), mensaje especifico de la clase
+    - redimencionar_anuncio, mensjae especifico de la clase
+    """
     FORMATO = "Social"
     SUB_TIPOS = ("facebook", "linkedin")
 

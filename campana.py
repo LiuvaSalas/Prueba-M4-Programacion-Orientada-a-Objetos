@@ -2,6 +2,20 @@ from anuncio import Anuncio, Video, Display, Social
 from errores import LargoExcedidoException
 
 class Campana:
+    """
+    Clase para generar campañas con listado de anuncios ya especificados
+
+    Parametros:
+    - nombre: str, nombre de la campaña
+    - listado_anuncios: list-dict, listado con diccionario de anuncios para crear anuncios para cada campaña.
+    - fecha_inicio: date, fecha de inicio de la campaña.
+    - fecha_termino: date, fecha de termino de la campaña.
+    
+    Return:
+    - crear_anuncios(), crea anuncios iterando la lista-diccionario que se le paso como atributo
+    - anuncios listado de anuncios para una campaña en especifico
+    - __str__: cadena de texto con el detalle de la campaña y el contenido de anuncios, como cuantos anuncios de cada tipo hay.
+    """
     def __init__(self, nombre: str, listado_anuncios, fecha_inicio = None, fecha_termino = None):
         self.__nombre = nombre
         self.__fecha_inicio = fecha_inicio
@@ -43,6 +57,13 @@ class Campana:
 
 
     def _crear_anuncios(self, listado_anuncios: list):
+        """
+        Parametros:
+        - listado_anuncios: list-dict, listado con diccionario de anuncios para crear anuncios para cada campaña.
+        
+        Return:
+        - anuncios listado de anuncios para una campaña en especifico
+        """
         anuncios = []
         for x in listado_anuncios:
             FORMATO = x.get("FORMATO")

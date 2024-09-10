@@ -1,7 +1,10 @@
 from anuncio import Anuncio, Video, Display, Social, SubTipoInvalidoException
 from campana import Campana, LargoExcedidoException
 
+#creamos el listado con el anuncio de video
 listado_anuncios = [{"FORMATO": "Video", "duracion": 30, "url_archivo": "www.video.com", "url_clic": "www.click.com", "sub_tipo": "instream"}]
+
+#creamos la campaña para modificar posteriormente
 campanha = Campana("Campaña1", listado_anuncios, "x", "y")
 
 #probamos que se crea la campaña
