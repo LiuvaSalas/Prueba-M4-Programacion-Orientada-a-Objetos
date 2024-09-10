@@ -4,21 +4,18 @@ class SubTipoInvalidoException(Exception):
     pass
 
 class Anuncio(ABC):
-    maximo = 1
-
     SUB_TIPOS = {
-        #Subtipos
-        "Video" : ("instream", "outstream"),
-        "Display" : ("tradicional", "native"),
-        "Social" : ("facebook", "linkedin")
+        "Video": ("instream", "outstream"),
+        "Display": ("tradicional", "native"),
+        "Social": ("facebook", "linkedin")
     }
 
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str) -> None:
+    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str,  sub_tipo: str) -> None:
         self.__ancho = None
         self.__alto = None
-        self.sub_tipo = None
         self.url_archivo = None
         self.url_clic = None
+        self._sub_tipo = None
         self.ancho = ancho
         self.alto = alto
         self.url_archivo = url_archivo
@@ -67,21 +64,21 @@ class Anuncio(ABC):
     def sub_tipo(self):
         return self._sub_tipo
 
-    def sub_tipo(self, sub_tipo):
-        if sub_tipo in self.__class__.SUB_TIPOS.get(self.__class__.FORMATO, []):
-            self._sub_tipo = sub_tipo
+    @sub_tipo.setter
+    def sub_tipo(self, nuevo_sub_tipo):
+        if nuevo_sub_tipo in self.SUB_TIPOS:
+            self._sub_tipo = nuevo_sub_tipo
         else:
-            raise SubTipoInvalidoException(f"El subtipo '{sub_tipo}' no es válido para el formato '{self.FORMATO}'.")
+            raise SubTipoInvalidoException(f"El subtipo '{nuevo_sub_tipo}' no es válido para el formato '{self.FORMATO}'.")
 
     @staticmethod
     def mostrar_formatos():
         for formato, subtipos in Anuncio.SUB_TIPOS.items():
-            print(f"FORMATO {formato.upper()}:")
-            print("-" * 10)
-            print("-" * 10)
+            print(f"{formato.upper()}:")
+            print("=" * 10)
             for subtipo in subtipos:
-                print(f"- {subtipo}")
-            print()
+                print(f"- {subtipo.capitalize()}")
+        return "-" * 10
 
     @abstractmethod
     def comprimir_anuncio():
@@ -96,9 +93,9 @@ class Video(Anuncio):
     FORMATO = "Video"
     SUB_TIPOS = ("instream", "outstream")
 
-    def __init__(self, duracion: int, sub_tipo: str, url_archivo: str, url_clic: str):
+    def __init__(self, duracion: int, url_archivo: str, url_clic: str, sub_tipo: str):
 
-        super().__init__(ancho = 1, alto = 1, sub_tipo = sub_tipo, url_archivo = url_archivo, url_clic = url_clic)
+        super().__init__( ancho = 1, alto = 1, url_archivo = url_archivo, url_clic = url_clic, sub_tipo = sub_tipo)
         self.duracion = duracion
 
     @property
@@ -106,7 +103,7 @@ class Video(Anuncio):
         return self._duracion
 
     @duracion.setter
-    def duracion(self, nueva_duracion):
+    def duracion(self, nueva_duracion:int):
         if nueva_duracion > 0:
             self._duracion = nueva_duracion
         else:

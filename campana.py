@@ -13,7 +13,7 @@ class Campana:
 
     @property
     def nombre(self):
-        return sef.__nombre
+        return self.__nombre
 
     @nombre.setter
     def nombre(self, nuevo_nombre):
@@ -42,18 +42,21 @@ class Campana:
 
     @property
     def anuncios(self):
-        return _anuncios
+        return self._anuncios
 
-    def _crear_anuncios(self, listado_anuncios):
+
+    def _crear_anuncios(self, listado_anuncios: list):
         anuncios = []
-        for data in listado_anuncios:
-            FORMATO = data.get("FORMATO")
+        for x in listado_anuncios:
+            FORMATO = x.get("FORMATO")
             if FORMATO == "Video":
-                anuncio = Video(**data)
+                anuncio = Video(x.get("duracion"), x.get("url_archivo"), x.get("url_clic"), x.get("sub_tipo"))
             elif FORMATO == "Display":
-                anuncio = Display(**data)
+                anuncio = Display(x.get("ancho"), x.get("alto"), x.get("url_archivo"), x.get("url_clic"), x.get("sub_tipo"))
             elif FORMATO == "Social":
-                anuncio = Social(**data)
+                anuncio = Social(x.get("ancho"), x.get("alto"), x.get("url_archivo"), x.get("url_clic"), x.get("sub_tipo"))
+            else:
+                raise ValueError(f"Formato de anuncio desconocido: {FORMATO}")
             anuncios.append(anuncio)
         return anuncios
 
